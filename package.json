@@ -3,12 +3,14 @@
   "version": "0.0.1-alpha.0",
   "description": "",
   "main": "lib/index.js",
+  "keywords": ["remix"],
+  "author": "Wei Zhu <yesmeck@gmail.com",
+  "license": "MIT",
   "scripts": {
-    "watch": "tsc -w"
+    "watch": "tsc -w",
+    "build": "tsc",
+    "prepack": "npm run build"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "devDependencies": {
     "@remix-run/dev": "^2.4.1",
     "@types/node": "^20.10.6",
