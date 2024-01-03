@@ -27,6 +27,7 @@ export class RemixModules {
   #routes: RouteManifest = {};
 
   async mount(module: string, path: string) {
+    const toPath = path.replace(/^\//, "");
     const moduleDir = resolve(process.cwd(), 'app', module);
     const rootRouteFile = findEntry(moduleDir, 'root');
 
@@ -40,7 +41,7 @@ export class RemixModules {
 
     if (rootRouteFile) {
       routes[rootRouteId] = {
-        path,
+        path: toPath,
         id: rootRouteId,
         file: join(module, rootRouteFile),
         parentId: 'root'
@@ -50,11 +51,11 @@ export class RemixModules {
     const fileRoutes = await flatRoutes(moduleDir);
 
     for (let route of Object.values(fileRoutes)) {
+      console.log(route);
       const id = `${module}/${route.id}`;
 
       route.id = id;
       route.file = join(module, route.file);
-      route.path = join(path, route.path ?? "");
       route.parentId =
         route.parentId === 'root' ?
           rootRouteFile ?
