@@ -12,7 +12,7 @@ A module is a remix app that can be mounted into another remix app.
 ```bash
 .
 ├── modules
-│   └── blog # this is a module
+│   └── blog <=== this is a module
 │       ├── routes
 │       └── root.tsx
 ├── routes
