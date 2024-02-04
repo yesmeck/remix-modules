@@ -37,7 +37,7 @@ module.exports = {
   routes: async () => {
     const modules = remixModules();
     await modules.mount('modules/order', {
-      at: '/orders', // mount the order module to /orders
+      at: '/orders', // mount the order module at /orders
       layout: 'routes/_admin' // use _admin as layout
     });
     return modules.routes();
