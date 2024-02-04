@@ -17,7 +17,7 @@
     "isbot": "^3.6.8",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "remix-modules": "0.0.1-aplha.1"
+    "remix-modules": ".."
   },
   "devDependencies": {
     "@remix-run/dev": "^2.6.0",
