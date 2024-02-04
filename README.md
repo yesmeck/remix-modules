@@ -36,7 +36,10 @@ const { remixModules } = require('remix-modules');
 module.exports = {
   routes: async () => {
     const modules = remixModules();
-    await modules.mount('modules/blog', '/blog'); // mount the blog module to /blog
+    await modules.mount('modules/blog', {
+      at: '/blog', // mount the blog module to /blog
+      layout: 'routes/_app' // use _app as layout
+    });
     return modules.routes();
   }
 };
