@@ -9,7 +9,7 @@ export default defineConfig({
       routes: async () => {
         const modules = remixModules();
         modules.mount('modules/order', {
-          at: '/order',
+          at: '/orders',
           layout: 'routes/_admin'
         });
         return modules.routes();
