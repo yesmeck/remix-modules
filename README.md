@@ -12,7 +12,7 @@ A module is a remix app that can be mounted into another remix app.
 ```bash
 .
 ├── modules
-│   └── blog <=== this is a module
+│   └── order <=== this is a module
 │       ├── routes
 │       └── root.tsx
 ├── routes
@@ -36,14 +36,16 @@ const { remixModules } = require('remix-modules');
 module.exports = {
   routes: async () => {
     const modules = remixModules();
-    await modules.mount('modules/blog', {
-      at: '/blog', // mount the blog module to /blog
-      layout: 'routes/_app' // use _app as layout
+    await modules.mount('modules/order', {
+      at: '/orders', // mount the order module to /orders
+      layout: 'routes/_admin' // use _admin as layout
     });
     return modules.routes();
   }
 };
 ```
+
+See the [example](./example) for a more detailed example.
 
 ## License
 
