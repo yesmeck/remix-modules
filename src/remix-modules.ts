@@ -3,8 +3,10 @@ import { Options, RemixApp } from './remix-app';
 export class RemixModules {
   #apps: RemixApp[] = [];
 
+  constructor(private appDirectory: string) {}
+
   mount(path: string, option: Options) {
-    const app = new RemixApp(path, option);
+    const app = new RemixApp(this.appDirectory, path, option);
     this.#apps.push(app);
   }
 

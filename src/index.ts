@@ -1,5 +1,5 @@
 import { RemixModules } from './remix-modules';
 
-export function remixModules() {
-  return new RemixModules()
+export function remixModules(appDirectory: string = "app") {
+  return new RemixModules(appDirectory)
 }

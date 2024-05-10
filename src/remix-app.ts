@@ -27,11 +27,11 @@ export type Options = {
 }
 
 export class RemixApp {
-  constructor(private path: string, private options: Options) {}
+  constructor(private appDirectory: string, private path: string, private options: Options) {}
 
   async  routes() {
     const toPath = this.options.at.replace(/^\//, "");
-    const moduleDir = resolve(process.cwd(), 'app', this.path);
+    const moduleDir = resolve(process.cwd(), this.appDirectory, this.path);
     const rootRouteFile = findEntry(moduleDir, 'root');
 
     if (!existsSync(resolve(moduleDir, 'routes'))) {
