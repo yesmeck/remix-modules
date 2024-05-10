@@ -27,11 +27,11 @@ export type Options = {
 }
 
 export class RemixApp {
-  constructor(private path: string, private options: Options) { }
+  constructor(private appDirectory: string, private path: string, private options: Options) {}
 
-  async routes() {
+  async  routes() {
     const toPath = this.options.at.replace(/^\//, "");
-    const moduleDir = resolve(process.cwd(), 'app', this.path);
+    const moduleDir = resolve(process.cwd(), this.appDirectory, this.path);
     const rootRouteFile = findEntry(moduleDir, 'root');
 
     if (!existsSync(resolve(moduleDir, 'routes'))) {
@@ -40,7 +40,7 @@ export class RemixApp {
 
     const routes: RouteManifest = {};
 
-    const rootRouteId = `${module}/root`;
+    const rootRouteId = `${this.path}/root`;
 
     const layout = this.options.layout ?? 'root';
 
@@ -56,7 +56,7 @@ export class RemixApp {
     const fileRoutes = await flatRoutes(moduleDir);
 
     for (let route of Object.values(fileRoutes)) {
-      const id = `${module}/${route.id}`;
+      const id = `${this.path}/${route.id}`;
 
       route.id = id;
       route.file = join(this.path, route.file);
@@ -64,7 +64,7 @@ export class RemixApp {
         route.parentId === 'root' ?
           rootRouteFile ?
             rootRouteId : layout
-          : `${module}/${route.parentId}`;
+          : `${this.path}/${route.parentId}`;
 
       routes[route.id] = { ...route, parentId: route.parentId };
     }
