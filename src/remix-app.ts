@@ -40,7 +40,7 @@ export class RemixApp {
 
     const routes: RouteManifest = {};
 
-    const rootRouteId = `${module}/root`;
+    const rootRouteId = `${this.path}/root`;
 
     const layout = this.options.layout ?? 'root';
 
@@ -55,11 +55,8 @@ export class RemixApp {
 
     const fileRoutes = await flatRoutes(moduleDir);
 
-    console.log(fileRoutes);
-
     for (let route of Object.values(fileRoutes)) {
-      console.log(route);
-      const id = `${module}/${route.id}`;
+      const id = `${this.path}/${route.id}`;
 
       route.id = id;
       route.file = join(this.path, route.file);
@@ -67,7 +64,7 @@ export class RemixApp {
         route.parentId === 'root' ?
           rootRouteFile ?
             rootRouteId : layout
-          : `${module}/${route.parentId}`;
+          : `${this.path}/${route.parentId}`;
 
       routes[route.id] = { ...route, parentId: route.parentId };
     }
