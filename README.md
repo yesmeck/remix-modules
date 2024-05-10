@@ -3,7 +3,7 @@
 Scale your remix app with modules.
 
 > [!WARNING]
-> This is a experimental package and is not ready for production use.
+> This is a experimental package, use at your own risk.
 
 ## What is a module?
 
@@ -30,19 +30,24 @@ npm install remix-modules
 Update your remix.config.js file and use the custom routes config option.
 
 ```js
-const { remixModules } = require('remix-modules');
+import { defineConfig } from 'vite';
+import { vitePlugin as remix } from '@remix-run/dev';
+import { remixModules } from 'remix-modules';
 
-/** @type {import('@remix-run/dev').AppConfig} */
-module.exports = {
-  routes: async () => {
-    const modules = remixModules();
-    await modules.mount('modules/order', {
-      at: '/orders', // mount the order module at /orders
-      layout: 'routes/_admin' // use _admin as layout
-    });
-    return modules.routes();
+export default defineConfig(() => {
+  return {
+    plugins: [remix(
+      routes: async () => {
+        const modules = remixModules();
+        await modules.mount('modules/order', {
+          at: '/orders', // mount the order module at /orders
+          layout: 'routes/_admin' // use _admin as layout
+        });
+        return modules.routes();
+      }
+    )]
   }
-};
+});
 ```
 
 See the [example](./example) for a more detailed example.
